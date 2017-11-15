@@ -1,0 +1,61 @@
+public class Tree {
+    private static class Node {
+        private int value;
+        private Node lChild;
+        private Node rChild;
+        
+        public Node( int v, Node l, Node r) {
+            value = v;
+            lChild = l;
+            rChild = r;
+        }
+        
+        public Node( int v ) {
+            value = v;
+            lChild = null;
+            rChild = null;
+        }
+    }
+    private Node root;
+    public Tree() {
+    root = null;
+    }
+}
+
+private Node CreateBinaryTree (int[] arr, int start, int end){
+		Node curr= null;
+		
+		if (start > end)
+			return null;
+		
+		int mid = ( start + end ) / 2;
+		curr = new Node(arr[mid]);
+		curr.lChild = CreateBinaryTree (arr, start, mid-1);
+		curr.rChild = CreateBinaryTree (arr, mid+1, end);
+		return curr;
+}
+  
+public void PrintInOrder(){
+		
+		PrintInOrder(root);
+		}
+	
+private void PrintInOrder(Node node)/* In order */{
+		if(node != null){
+			PrintInOrder(node.lChild);
+			System.out.print(" "+ node.value);
+			PrintInOrder(node.rChild);
+		}
+}
+
+public static void main(String[] args) {
+		Tree t = new Tree();
+		int[] arr = {1,2,3,4,5,6,7,8,9,10};
+		t.CreateBinaryTree(arr);
+		t.PrintInOrder();
+		
+		t.delete(6);
+		System.out.println();
+		t.PrintInOrder();
+    }
+}    
